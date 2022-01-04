@@ -1,0 +1,406 @@
+<!DOCTYPE html> 
+<html lang="ko">     
+<head>     
+<meta charset="euc-kr">     
+<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">     
+<title>페퍼저축은행 PC 보안점검</title>     
+<meta name="description" content="">     
+<meta name="author" content="정준철">     
+<script type="text/javascript" src="c:\security\jquery.min.js"></script>  
+<!--meta name="viewport" content="width=device-width; initial-scale=1.0"-->     
+<link  rel="stylesheet" type="text/css">     
+</head>     
+<body onload=nodisplay()>     
+<style type="text/css">   
+.pc_info,.wrap,body{margin:0 auto}body{padding:0}.wrap{width:1080px;text-align:left}.content{padding:50px;font-family:'Nanum Gothic',sans-serif}.security_title{text-align:center;padding-bottom:30px}.security_title h1{font-family:'Nanum Gothic Bold',sans-serif;font-size:24px;color:#000}.security_title p.copyright{font-size:10px}.pc_info{width:450px;background:#eee;padding:30px 50px 20px;text-align:justify;font-family:'Nanum Gothic',sans-serif;font-size:14px;color:#000;line-height:1.6em}.pc_info strong.username,.security_list h2{font-family:'Nanum Gothic Bold',sans-serif}.pc_info span.admin{font-size:12px;line-height:4em}.security_list{padding:50px}.security_list h2{font-size:18px;color:#333;padding-bottom:20px}.security_list h2 span.small{font-size:12px}.security_list table{font-size:13px;color:#333;border-collapse:collapse;border:0}.security_list td{padding:10px 15px}.security_list td a{color:#333;text-decoration:none}.security_list .code_wrap{display:block;font-family:monospace;background:#000;color:#fff;padding:15px}.security_list h3,.security_list p a,.security_list p strong{font-family:'Nanum Gothic Bold',sans-serif}.security_list .code_wrap code{white-space:pre-wrap}.security_list h3{font-size:14px;padding:20px 0 0 10px}.security_list p{font-size:13px;color:#666;padding-left:10px;line-height:2em}.security_list p strong{color:#000}.security_list p a{color:#fff;background:#2ac1bc;border:0;padding:10px 40px;text-decoration:none}.security_list p a:hover{background:#ccc}.security_list p span{font-size:10px}      
+</style type="text/css">      
+<div class="wrap">     
+<div class="content">     
+<div class="security_title">     
+<h1>페퍼저축은행 통합 보안 PC 지킴이</h1>     
+<p class="copyright">Made by 2019 정준철 Co. Ltd. All right Reserved Ver1.4</p>     
+</div>     
+<p class="pc_info">     
+이 PC는 <strong class="username" id="uname" ></strong>님의 PC 입니다.<br>     
+이 PC의 마지막 점검 시간은 <strong style=font-size:"28px" id="time"></strong> 입니다.<br>   
+이 PC의 미흡한 항목은 <Strong id="counts"; style=color:red;></strong>개 입니다.<br>   
+점검 사항에 대해서 궁금하시면 연락주시기 바랍니다. <br>     
+<span class="admin">문의사항 : 정보보호팀 / 정준철 / 031-8015-9386</span>     
+</p>  
+<div class="security_list">
+<!-- 전체 조치 만들어야 하지만... 멀었어..<p>
+<a onclick="RunFile2(100)" target="_blank" style="float:right">▶ 한번에 조치하기</a>   
+</p>-->
+<h2>▶ 점검 항목 대상 <span class="small">(* 항목이 <Strong style=color:red;>빨간 글씨</strong>로 보일 시 미준수)</span></h2>
+<table>      
+<tbody>    
+<tr>   
+<td><a id="a1" href="#1">▶ 백신 설치 및 정상 작동 여부 점검</a></td>    
+<td><a id="a2" href="#2">▶ 중요 Windows Update 패치 점검</a></td>    
+<td><a id="a3" href="#3">▶ 화면보호기 정상 설정 여부</a></td>    
+</tr>    
+<tr>    
+<td><a id="a4" href="#4">▶ 인터넷 익스플로러 버전 점검</a></td>    
+<td><a id="a5" href="#5">▶ 패스워드 설정 및 변경 여부</a></td>    
+<td><a id="a6" href="#6">▶ 윈도우 시스템 이벤트 기록 점검</a></td>    
+</tr>    
+<tr>    
+<td><a id="a7" href="#7">▶ 공유 폴더 점검</a></td>    
+<td><a id="a8" href="#8">▶ 방화벽 기능 활성화 여부 점검</a></td>     
+<td><a id="a9" href="#9">▶ 원격 기능 금지 여부 점검(코로나 19로 인한 위반제외)</a></td>    
+</tr>    
+<tr>    
+<td><a id="a10" href="#10">▶ 프록시 사용 여부 점검</a></td>   
+<td><a id="a11" href="#11">▶ 패스워드 정책 적용 점검</a></td>    
+<td><a id="a12" href="#12">▶ windows 메신저 설치 여부 점검</a></td>    
+</tr>    
+</tbody>     
+</table>     
+</br>     
+</br>     
+<h2>▶ 항목 세부 내용 <span class="small">(조치하기 클릭시 자동으로 미 준수 항목 조치)</span></h2>     
+<table>      
+<tbody>     
+<tr>      
+<p>   
+<a onclick="display()" target="_blank" style="float:left" >▶ 전체 항목 조회</a>
+<a onclick="RunFile('C:/security/locate.bat');" target="_blank" style="float:right">▶ 다시 검사 하기</a>
+</p>   
+<p>      
+</p>   
+</tr>     
+</tbody>     
+</table>  
+</div>      
+<div id="1" class="security_list">        
+<h2> 백신 설치 및 실행 여부 점검</h2>      
+<div class="code_wrap">   
+<pre><div id="target1"></div></pre>    
+</div>     
+<h3>▶ 외부 위협</h3>      
+<p>     
+<strong>- 백신 설치 여부와 설치된 백신이 주기적으로 업데이트가 되는지 점검하여 악성코드 감염에 대한 대비를 하기 위함</br></strong>   
+- 백신이 설치되지 않으면, 바이러스, 웜, 스파이웨어 등의 감염이 발생하여 파일의 유출 및 무결성 손상이 발생함</br>   
+- 실시간 감시 기능이 적용되어 있지 않을 경우, 악성코드에 대해 실시간 감지가 이루어지지 않아 시스템 사용자가 악성코드 감염될 위험이 존재</br>   
+- 사용자가 인터넷을 통해 다운로드 받은 파일을 실행할 경우 백신 프로그램이 악성코드 감염을 실시간으로 점검하여 대비를 위함     
+</p>     
+<h3>▶ 점검방법</h3>      
+<p>      
+* V3 실시간 설정여부(설정 :1, 미설정 :0) 상태가 <strong>1</strong> 이어야함</br>      
+* V3 자동 업데이트 설정(설정 :1, 미설정 :0) 상태가 <strong>1</strong> 이어야함 </br>     
+* V3 자동 업데이트 주기(시간) 설정값이 <strong>3</strong> 이어야함 </br>
+* V3 자동 업데이트 주기(시간) 설정값이 <strong>실행중</strong> 이어야함    
+<a onclick="alertT()" target="_blank" style="float:right">조치하기▶</a>   
+</p>
+</div>     
+<div id="2" class="security_list">      
+<h2> 중요 Windows Update 패치 점검</h2>      
+<div class="code_wrap">   
+<pre><div id="target2"></div></pre>    
+</div>      
+<h3>▶ 외부 위협</h3>      
+<p>   
+<strong>- HOT Fix 최신 보안패치 적용을 시키지 않을 경우, 이미 공개된 취약점을 통하여 비인가자의 시스템 접근 및 관리자 권한 획득이 가능해짐</strong></br>   
+- windows 업데이트가 최신 상태이고, 자동 업데이트 설정이 되어있는 경우 취약점이 상당수 조치가 됨   
+</p>     
+<h3>▶ 점검방법</h3>      
+<p>      
+* 중요 Windows Update 잔여 수량 상태가 <strong>0</strong> 이어야함</br>   
+* 자동 Windows Update 사용 상태가 <strong>0</strong> 이어야함</br>  
+<a onclick="RunFile2(2)" style="float:right">조치하기▶</a>   
+</p>   
+</div>     
+<div id="3" class="security_list">      
+<h2> 화면보호기 정상 설정 여부</h2>      
+<div class="code_wrap">   
+<pre><div id="target3"></div></pre>    
+</div>      
+<h3>▶ 외부 위협</h3>      
+<p>     
+<strong>- 사용자가 자리를 비운 사이 임의의 사용자가 접근하여 중요 정보를 조회 및 악의 적인 행위를 수행할 수 있음 </br></strong>   
+- 화면보호기를 해제시 패스워드 입력 후 해제를 해야 내 컴퓨터의 접근을 보호</br>   
+- 자리를 잠시 비우거나 사용하지 않고 있을때는 화면을 보호해야 함   
+</p>     
+<h3>▶ 점검방법</h3>      
+<p>      
+* 화면잠금 설정 여부 상태가 <strong>1</strong> 이어야함</br>      
+* 화면잠금 설정 시간(초) 상태가 <strong>600(10분)</strong> 미만 이어야함</br>  
+<a onclick="RunFile2(3)" style="float:right">조치하기▶</a>   
+</p>  
+</div>    
+<div id="4" class="security_list">     
+<h2>인터넷 익스플로러 버전 점검</h2>     
+<div class="code_wrap">     
+<pre><div id="target4"></div></pre>      
+</div>      
+<h3> ▶ 외부 위협 </h3>      
+<p>      
+- 최신 브라우저를 사용함으로써 인터넷 보안 위협에 노출을 줄이고 취약점을 줄이기 위함</br>      
+- 최신 브라우저를 사용하지 않으면 MS사의 추가적인 패치 지원이 없어, 보안 패치를 받지 못하게됨   
+</p>      
+<h3> ▶ 점검방법 </h3>      
+<p>     
+* 인터넷 익스플로러 버전이 <strong>11</strong> 이상이어야함</br>     
+<a onclick="RunFile2(4)" style="float:right">조치하기▶</a>      
+</p>  
+</div>    
+<div id="5" class="security_list">      
+<h2> 패스워드 설정 및 변경 여부</h2>      
+<div class="code_wrap">     
+<pre><div id="target5"></div></pre>     
+</div>     
+<h3>▶ 외부 위협</h3>      
+<p>     
+- 패스워드를 주기적으로 변경하여 암호 크래킹의 가능성을 낮추고, 불법으로 획득한 암호의 무단 사용을 방지하기 위함</br>   
+</p>     
+<h3>▶ 점검방법</h3>      
+<p>      
+* 마지막으로 암호 변경한 날짜가 <strong>90</strong>일 이전으로 설정되어 있어야함</br>   
+* 비밀번호 암호 만료 날짜가 설정이 되어있으면 자동으로 <strong>90</strong>일마다 패스워드를 변경하게 알려줌</br>   
+* 패스워드 경고 설정 일자가 <strong>15</strong>일 미만으로 설정함으로써 미리 변경할 수 있도록 알려줌   
+<a onclick="RunFile2(1)" target="_blank" style="float:right">조치하기▶</a>     
+</p>  
+</div>     
+<div id="6" class="security_list">      
+<h2> 윈도우 시스템 이벤트 기록 점검</h2>      
+<div class="code_wrap">     
+<pre><div id="target6"></div></pre>    
+</div>     
+<h3>▶ 외부 위협</h3>      
+<p>     
+- 침해사고가 발생 시 원인을 추적하기 위해 감사 기능을 활성화 함</br>   
+- 감사 기능을 활성화 함으로써 침해사고 예방을 넘어서 추적까지 가능해짐    
+</p>     
+<h3>▶ 점검방법</h3>      
+<p>      
+- 시스템 이벤트 감사 상태가 <strong>3</strong> 이어야함</br>   
+- 개체 엑세스 감사 상태가 <strong>0</strong> 이어야함</br>   
+- 권한 사용 감사 상태가 <strong>3</strong> 이어야함</br>   
+- 정책 변경 감사 상태가 <strong>3</strong> 이어야함</br>   
+- 계정 관리 감사 상태가 <strong>2</strong> 이어야함</br>   
+- 계정 로그온 감사 상태가 <strong>2</strong> 이어야함</br>   
+- 로그온 이벤트 감사 상태가 <strong>3</strong> 이어야함</br>   
+<a onclick="RunFile2(6)" style="float:right">조치하기▶</a>   
+</p>     
+</div>    
+<div id="7" class="security_list">      
+<h2> 공유 폴더 점검</h2>      
+<div class="code_wrap">     
+<pre><div id="target7"></div></pre>     
+</div>     
+<h3>▶ 외부 위협</h3>      
+<p>     
+- 사용하지 않는 불필요한 공유 폴더를 해제하여 외부로 부터 침입을 방지하기 위함</br>   
+- 접근권한이 Everyone으로 설정된 공유 폴더는 정보 유출 및 악성코드 유포의 접점이 될 수 있음    
+</p>     
+<h3>▶ 점검방법</h3>      
+<p>      
+* 공유 이름에 <strong>C$, D$, ADMIN$</strong>등의 기본 공유 폴더가 없어야함</br>    
+* 공유 이름에 불필요한 공유 폴더가 존재하지 않아야함    
+<a onclick="RunFile2(7)" style="float:right">조치하기▶</a>    
+</p>   
+</div>     
+<div id="8" class="security_list">      
+<h2> 방화벽 기능 활성화 여부 점검</h2>      
+<div class="code_wrap">     
+<pre><div id="target8"></div></pre>     
+</div>     
+<h3>▶ 외부 위협</h3>      
+<p>     
+- 방화벽 기능 활성화를 통해 외부망의 비인가 접근 및 외부망으로 통신을 시도하는 프로그램을 통제하기 위함</br>   
+- 방화벽 기능이 비활성화되어 있을 경우, 유해 정보가 유입되거나 시스템 사용자의 파일이나 폴더가 외부로 유출될 위험이 존재    
+</p>     
+<h3>▶ 점검방법</h3>      
+<p>      
+* Windows 방화벽 설정 상태가 <strong>1</strong> 이어야함   
+<a onclick="RunFile2(8)" style="float:right">조치하기▶</a>   
+</p>  
+</div>     
+<div id="9" class="security_list">     
+<h2> 원격 기능 금지 여부 점검</h2>     
+<div class="code_wrap">     
+<pre><div id="target9"></div></pre>     
+</div>      
+<h3> ▶ 외부 위협 </h3>      
+<p>      
+- 원격 지원 기능이 활성화 되어 있을경우 비인가자에게 원격에서의 접근을 허용 되어 시스템 제어 권한이 악용될 수 있음<br>      
+</p>      
+<h3> ▶ 점검방법 </h3>     
+<p>     
+* 원격 기능 활성화 여부 점검 설정이 <strong>1</strong> 이어야함</br>   
+* 원격 기능 활성화 여부 점검 설정이 <strong>0</strong> 이어야함</br>   
+<a onclick="alertT2()" style="float:right">조치하기▶</a>     
+</p>  
+</div>    
+<div id="10" class="security_list">      
+<h2> 프록시 사용 여부 점검</h2>      
+<div class="code_wrap">     
+<pre><div id="target10"></div></pre>     
+</div>     
+<h3>▶ 외부 위협</h3>      
+<p>     
+- 프록시를 이용하면 정보보호시스템을 우회하여 악의적인 행위가 가능하고 악의적인 프록시 서버의 경우 정보유출의 위험이 있음</br>   
+- 프록시 설정을 하지 않고, <strong>프록시 프로그램 혹은 vpn프로그램</strong>을 쓰지 않을 것</br>   
+<strong style="color:red"> - 프록시 사용의 경우 정보보호팀의 승인을 받아야 하며 무단으로 사용시 정보보호 위반으로 통지 받을 수 있음</strong>     
+</p>     
+<h3>▶ 점검방법</h3>      
+<p>    
+* 프록시 기능 활성화 여부 설정이 <strong>0</strong> 이어야함 </br>   
+* 프록시 설정 서버 값이 없거나 <strong>0.0.0.0</strong> 이어야함   
+<a onclick="RunFile2(10)" style="float:right">조치하기▶</a>  
+</p>  
+</div>     
+<div id="11" class="security_list">      
+<h2> 패스워드 정책 적용 점검</h2>      
+<div class="code_wrap">     
+<pre><div id="target11"></div></pre>      
+</div>     
+<h3>▶ 외부 위협</h3>      
+<p>     
+- 패스워드 길이와 복잡성을 설정함으로써 유추하기 어렵게 만들고 해독을 어렵게 만듬</br>      
+- 사내규정에 맞는 패스워드 정책을 설정함으로써 규정을 준수하고 비인가자의 PC접근 위협을 줄임   
+</p>     
+<h3>▶ 점검방법</h3>      
+<p>      
+* 최소 비밀번호 사용기간 설정값이 <strong>1</strong> 이어야함</br>   
+* 최대 비밀번호 사용기간 설정값이 <strong>90</strong> 미만 이어야함</br>   
+* 최소 비밀번호 사용길이 설정값이 <strong>8</strong> 이상 이어야함</br>   
+* 비밀번호 복잡성 설정여부 설정값이 <strong>1</strong> 이어야함</br>   
+* 비밀번호 최근 암호 기억 설정값이 <strong>3</strong> 이어야함</br>   
+* 계정 잠금 임계값 횟수 설정값이 <strong>5</strong> 이어야함</br>   
+* 계정 잠금 임계값 초기화 시간 설정값이 <strong>5</strong> 이어야함</br>   
+* 계정 잠금 기간 설정값이 <strong>5</strong> 이어야함</br>   
+<a onclick="RunFile2(11)" style="float:right">조치하기▶</a>    
+</p>   
+</div> 
+<div id="12" class="security_list">      
+<h2>windows 메신저 설치 여부 점검</h2>      
+<div class="code_wrap">     
+<pre><div id="target12"></div></pre>      
+</div>     
+<h3>▶ 외부 위협</h3>      
+<p>     
+- windows에서 기본적으로 제공하는 메신저를 막음으로써 정보유출을 차단함</br>      
+</p>     
+<h3>▶ 점검방법</h3>      
+<p>      
+* Windows 메신져 활성화 여부 설정값이 <strong>1</strong> 이어야함</br> 
+* Skype 설치 상태가 <strong>설치 안됨</strong> 이어야함</br>  
+<a onclick="RunFile2(12)" style="float:right">조치하기▶</a>    
+</p>   
+</div>  
+</div><!-- content -->     
+</div><!-- wrap -->     
+</body>     
+</html>     
+<script type="text/javascript">   
+function nodisplay(){   
+for(var j=1; j<13; j++){   
+var y = document.getElementById(j);   
+y.style.display = "none";   
+}   
+}  
+$(function(){    
+$( "#target1" ).load( "file:///security/log/v3.txt" );    
+});    
+$(function(){    
+$( "#target2" ).load( "file:///security/log/windowsupdate.txt" );    
+});   
+$(function(){    
+$( "#target3" ).load( "file:///security/log/screen.txt" );    
+});   
+$(function(){    
+$( "#target4" ).load( "file:///security/log/iever.txt" );    
+});   
+$(function(){    
+$( "#target5" ).load( "file:///security/log/pw_chg.txt" );    
+});   
+$(function(){    
+$( "#target6" ).load( "file:///security/log/eventrule.txt" );    
+});   
+$(function(){    
+$( "#target7" ).load( "file:///security/log/shared.txt" );    
+});   
+$(function(){    
+$( "#target8" ).load( "file:///security/log/firewallcheck1.txt" );    
+});   
+$(function(){    
+$( "#target9" ).load( "file:///security/log/remotecom.txt" );    
+});   
+$(function(){    
+$( "#target10" ).load( "file:///security/log/proxy.txt" );    
+});   
+$(function(){    
+$( "#target11" ).load( "file:///security/log/pwdrule.txt" );    
+}); 
+$(function(){    
+$( "#target12" ).load( "file:///security/log/messanger.txt" );    
+});  
+$(function(){    
+$( "#uname" ).load( "file:///security/log/name.txt" );    
+});   
+$(function(){    
+$( "#time" ).load( "file:///security/log/time.txt" );    
+});   
+var count = 0;   
+setTimeout(function() {   
+for (var g=1; g<13; g++){   
+var text = $("#target"+g).html();   
+if (text.indexOf("취약") > -1) {
+var x = document.getElementById("a"+g); //div   
+var y = document.getElementById(g);    
+x.style.color = "red";    
+x.style.textDecoration = "underline"; 
+y.style.display = "Inline";   
+if(g!=9){count = count +1;}
+}   
+}   
+document.getElementById("counts").innerHTML =count;
+if (count>0){
+confirm("내 PC 지키미의 취약한 항목을 조치해야 합니다. 그렇지 않으면 위반사항 적발될 수 있습니다.");
+}
+}   
+,1000);   
+var flag = "true";   
+function display(){   
+if(flag == "true"){   
+for(var j=1; j<13; j++){   
+var y = document.getElementById(j);   
+y.style.display = "inline";   
+}   
+flag = "false"   
+}   
+else{   
+for(var j=1; j<13; j++){   
+var y = document.getElementById(j);   
+y.style.display = "none";   
+}   
+flag ="true"   
+}   
+}  
+function alertT(){  
+alert("자동 조치 불가 항목입니다. 정보보호팀으로 연락주시기 바랍니다.")  
+}  
+function alertT2(){  
+alert("코로나 19로 인한 위반 제외입니다. 조치하지 말아 주시기 바랍니다.")  
+}  
+ function RunFile(URL) { 
+if(doubleSubmitCheck()){alert("스크립트 실행 중 연속 클릭 시 오류가 발생할 수 있습니다.\n실행 중이 아니라면 F5버튼을 누르고 다시 이용부탁드립니다."); return;} 
+        WshShell = new ActiveXObject("WScript.Shell"); 
+        WshShell.Run(URL, 1, false); 
+ } 
+  function RunFile2(num) { 
+if(doubleSubmitCheck()){alert("스크립트 실행 중 연속 클릭 시 오류가 발생할 수 있습니다.\n실행 중이 아니라면 F5버튼을 누르고 다시 이용부탁드립니다."); return;} 
+        WshShell = new ActiveXObject("WScript.Shell"); 
+        WshShell.Run('"C:/security/nicePC/ID.bat "'+num); 
+ } 
+var doubleSubmitFlag = false; 
+function doubleSubmitCheck(){ 
+if(doubleSubmitFlag){ 
+return doubleSubmitFlag; 
+}else{ 
+doubleSubmitFlag = true; 
+return false; 
+} 
+} 
+</script>    

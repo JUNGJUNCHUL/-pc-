@@ -1,0 +1,49 @@
+get-process : 이름이 "mshta"인 프로세스를 찾을 수 없습니다. 프로세스 이름을 검증하고 다시 cmdlet을 호출하십시오.
+위치 C:\security\JCpowershell.ps1:8 문자:15
++ stop-process (get-process mshta).id
++               ~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (mshta:String) [Get-Process], ProcessCommandException
+    + FullyQualifiedErrorId : NoProcessFoundForGivenName,Microsoft.PowerShell.Commands.GetProcessCommand
+ 
+'WMIC.exe' 프로그램을 실행하지 못했습니다. 액세스가 거부되었습니다위치 C:\security\JCpowershell.ps1:179 문자:10
++ $share = wmic share get name","caption","path
++          ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+위치 C:\security\JCpowershell.ps1:179 문자:1
++ $share = wmic share get name","caption","path
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ResourceUnavailable: (:) [], ApplicationFailedException
+    + FullyQualifiedErrorId : NativeCommandFailed
+ 
+'WMIC.exe' 프로그램을 실행하지 못했습니다. 액세스가 거부되었습니다위치 C:\security\JCpowershell.ps1:198 문자:6
++ $v = wmic useraccount where name="'$u_name'" get passwordexpires
++      ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~.
+위치 C:\security\JCpowershell.ps1:198 문자:1
++ $v = wmic useraccount where name="'$u_name'" get passwordexpires
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ResourceUnavailable: (:) [], ApplicationFailedException
+    + FullyQualifiedErrorId : NativeCommandFailed
+ 
+null 배열에 대한 인덱스를 만들 수 없습니다.
+위치 C:\security\JCpowershell.ps1:199 문자:4
++ if($v[2].split(" ") -eq "FALSE"){
++    ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : InvalidOperation: (:) [], RuntimeException
+    + FullyQualifiedErrorId : NullArray
+ 
+Get-ItemProperty : 'HKLM:\SOFTWARE\Policies\Microsoft\Messanger\Client' 경로는 존재하지 않으므로 찾을 수 없습니다.
+위치 C:\security\JCpowershell.ps1:230 문자:15
++ ... essanger = (Get-ItemProperty 'HKLM:\SOFTWARE\Policies\Microsoft\Messa ...
++                 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ObjectNotFound: (HKLM:\SOFTWARE\...essanger\Client:String) [Get-ItemProperty], ItemNotFo 
+   undException
+    + FullyQualifiedErrorId : PathNotFound,Microsoft.PowerShell.Commands.GetItemPropertyCommand
+ 
+'WMIC.exe' 프로그램을 실행하지 못했습니다. 액세스가 거부되었습니다위치 C:\security\JCpowershell.ps1:629 문자:11
++ $share2 = wmic share get name
++           ~~~~~~~~~~~~~~~~~~~.
+위치 C:\security\JCpowershell.ps1:629 문자:1
++ $share2 = wmic share get name
++ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+    + CategoryInfo          : ResourceUnavailable: (:) [], ApplicationFailedException
+    + FullyQualifiedErrorId : NativeCommandFailed
+ 
